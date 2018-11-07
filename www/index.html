@@ -37,32 +37,50 @@
 <body>
     <div class="app">
 
-    	<div class="container" style="">
-	<h2>Te amo tanya</h2>
-	<hr>
-	<b>Action </b>
+        <div class="container" style="">
+    <h2>Te amo tanya</h2>
+    <hr>
+    <b>Action </b>
   <br/><br>
-	<button class="btn btn-sucess" id="a1" >Left</button> <button class="btn btn-sucess" id="a2">Right</button><br><br>
-	<button class="btn btn-sucess" id="a3">Escape</button> <button class="btn btn-sucess" id="a4">Space</button> <br><br>
-	<button class="btn btn-sucess" id="a5">Enter</button> <button class="btn btn-sucess" id="a7">Miminized</button> 
-	<br> <b id="response"></b>
+    <button class="btn btn-sucess" id="a1" >Left</button> <button class="btn btn-sucess" id="a2">Right</button><br><br>
+    <button class="btn btn-sucess" id="a3">Escape</button> <button class="btn btn-sucess" id="a4">Space</button> <br><br>
+    <button class="btn btn-sucess" id="a5">Enter</button> <button class="btn btn-sucess" id="a7">Miminized</button> 
+    <br> <b id="response"></b>
+<br><br> 
+
+    <div id="something" style="width:100%;height:200px;background-color:black;position:relative;">
+    </div>
  </div>
     
-	<script type="text/javascript">
-		// 1. create a new XMLHttpRequest object -- an object like any other!
+    <script type="text/javascript">
+        // 1. create a new XMLHttpRequest object -- an object like any other!
 
-		$("button[id^='a']").click(function(){
-				cmd($(this).text());
-			});
-		
-		
-			function cmd(id){
-				$.post("https://iep.life/apps/mouse.php?id=put&cmd="+id).done(function(data){
-			 	$("#response").html(data);
-			 });	
-			}
-		
-	</script>
+        $("button[id^='a']").click(function(){
+                cmd($(this).text());
+            });
+        
+        
+            function cmd(id){
+                $.post("https://iep.life/apps/mouse.php?id=put&cmd="+id).done(function(data){
+                $("#response").html(data);
+             });    
+            }
+        
+        $('#something').click(function (e){
+
+    var elm = $(this);
+    w=elm.width();
+    h=elm.height();
+    var xPos = e.pageX - elm.offset().left;
+    var yPos = e.pageY - elm.offset().top;
+
+    pX=((xPos * 100) / w) / 100;
+    pY=((yPos * 100) / h ) /100;
+     $("#response").html(pX + "<>" + pY);
+    cmd("move@"+pX+"@"+pY)
+});
+
+    </script>
 
 
         
